@@ -18,7 +18,7 @@ namespace KiwiSuit.Filter
         {
             var book = context.Arguments.FirstOrDefault(a => a.GetType() == typeof(BookDTO)) as BookDTO;
             var result = await _validator.ValidateAsync(book);
-            if (!result.IsValid) return Results.Json(result.Errors, statusCode: 400);
+            if (!result.IsValid) return Results.Json(result.Errors);
 
             return await next(context);
         }

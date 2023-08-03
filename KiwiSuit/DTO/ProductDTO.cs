@@ -7,5 +7,9 @@
         public string Names { get; set; }
 
         public string Descriptions { get; set; }
+
+
+        //add the sting property catogroy 
+        //price
     }
 }

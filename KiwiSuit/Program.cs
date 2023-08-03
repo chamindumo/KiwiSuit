@@ -26,9 +26,9 @@ using KiwiSuit.Data;
 using KiwiSuit.DTO;
 using KiwiSuit.Endpoints_Routs_Api;
 using KiwiSuit.Models;
-using KiwiSuit.Repositery;
 using KiwiSuit.Service;
 using KiwiSuit.Validator;
+using KiwiSuit.Genuric;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = new LoggerConfiguration()
@@ -46,6 +46,12 @@ builder.Services.AddAutoMapper(typeof(Books), typeof(Product));
 
 builder.Services.AddScoped<IValidator<BookDTO>, BookDTOValidator>();
 builder.Services.AddScoped<IValidator<ProductDTO>, ProductDTOValidator>();
+
+
+builder.Services.AddScoped(typeof(IRepositoy<>), typeof(Repository<>));
+
+
+
 builder.Services.AddScoped<IProductRepositery, ProductRepositery>();
 builder.Services.AddScoped<IBookRepositery, BookRepository>();
 builder.Services.AddScoped<IBookService, BookServices>();

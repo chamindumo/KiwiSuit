@@ -31,10 +31,10 @@ namespace KiwiSuit.Endpoints_Routs_Api
             });
             app.MapPost("Add/product", async (HttpContext httpContext, ProductDTO inputDTO) =>
             {
-                var repository1 = httpContext.RequestServices.GetRequiredService<IProductService>();
+                var repository = httpContext.RequestServices.GetRequiredService<IProductService>();
 
 
-                repository1.Create(inputDTO);
+                repository.Create(inputDTO);
 
                 return Results.Ok(inputDTO);
 
@@ -43,9 +43,9 @@ namespace KiwiSuit.Endpoints_Routs_Api
             app.MapPut("/product/{id}", async (HttpContext httpContext, ProductDTO inputDTO, int id) =>
             {
 
-                var repository1 = httpContext.RequestServices.GetRequiredService<IProductService>();
+                var repository = httpContext.RequestServices.GetRequiredService<IProductService>();
 
-                var existingproduct = await repository1.GetProductById(id);
+                var existingproduct = await repository.GetProductById(id);
                 if (existingproduct == null)
                 {
                     return Results.NotFound("product not found");
@@ -53,7 +53,7 @@ namespace KiwiSuit.Endpoints_Routs_Api
 
 
 
-                repository1.Update(id, inputDTO);
+                repository.Update(id, inputDTO);
 
                 return Results.Ok(inputDTO);
             }).AddEndpointFilter<ProductValidationFilter>();
